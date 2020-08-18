@@ -40,7 +40,7 @@
                                   });
                                 }
 
-        function sendToDB(){
+                                function sendToDB(){
               var text = document.getElementById("search_text").value;
               var date =  new Date();
               var fecha = date.getDate() + '-' + ( date.getMonth() + 1 ) + '-' + date.getFullYear();
@@ -51,17 +51,30 @@
                     "search_text" : text,
                     "date" : fecha_hora
                      }
-              fetch(apiUrl,{
-                    method: 'POST',
-                    headers: {
-                       'Content-type' : 'text/json'
-                    },
-                    body: JSON.stringify(data)
-                  })
+              var pos = JSON.stringify(data);
 
+
+              fetch(apiUrl,{
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                                },
+                        body: pos,
+                        cache: 'no-cache'
+                    })
+                    .then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(data) {
+                        console.log('data = ', data);
+                    })
+                    .catch(function(err) {
+                        console.error(err);
+                    });
 
 
               }
+
 
 
         $("#btn_search").addEventListener("click", function(){
