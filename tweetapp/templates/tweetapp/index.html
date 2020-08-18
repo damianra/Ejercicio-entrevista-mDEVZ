@@ -1,0 +1,85 @@
+{% extends "tweetapp/plantilla.html" %}
+{% block content %}
+
+
+          <div class="form-group row">
+            <div class="col">
+              <input type="text" id="search_text" class="form-control" id="inputPassword" placeholder="Insert text and search in Twitter">
+
+            </div>
+            <div class="col-1">
+              <button id="btn_search" type="submit" class="btn btn-primary">Search</button>
+
+            </div>
+
+          </div>
+
+        <div id="content">
+
+      </div>
+
+
+<script>
+
+
+        function $(selector){
+            return document.querySelector(selector);
+        }
+
+        var twdata = [];
+
+        async function getData() {
+
+              var text = document.getElementById("search_text").value;
+              fetch("http://127.0.0.1:8000/v1/search/?query="+text)
+              .then(response => response.json())
+              .then(data => {data.forEach((data) => {
+                                  twdata.push(data)
+
+                                  });
+                                  });
+                                }
+
+        function sendToDB(){
+              var text = document.getElementById("search_text").value;
+              var date =  new Date();
+              var fecha = date.getDate() + '-' + ( date.getMonth() + 1 ) + '-' + date.getFullYear();
+              var hora = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+              var fecha_hora = fecha + ' ' + hora;
+              var data = { search_text : text, date : fecha_hora };
+              $.ajax({
+                      url : 'http://127.0.0.1:8000/v1/history/',
+                      data : data,
+                      method : 'post', //en este caso
+                      dataType : 'json',
+
+              });
+              }
+
+
+        $("#btn_search").addEventListener("click", function(){
+              getData();
+              twdata.forEach(data => {
+              var topDiv = $('<div style="max-width: 100%;"></div>').addClass("card mb-3");
+              var subDiv = $('<div></div>').addClass("row no-gutters").appendTo($(topDiv));
+              var imgDiv = $('<div></div>').addClass("col-md-4").appendTo($(subDiv));
+              var img = $('<img src="" width="75%" height="100%">').attr("src", data['image']).appendTo($(imgDiv));
+              var card = $('<div></div>').addClass("col-md-8").appendTo($(subDiv));
+              var cardBody = $('<div></div>').addClass("col-md-8").appendTo($(card));
+              var h5Title = $('<h5></h5>').addClass("card-title").text(data['user']).appendTo($(cardBody));
+              var pContent = $('<p></p>').addClass("card-text").text(data['text']).appendTo($(cardBody));
+              var pContent2 = $('<p></p>').addClass("card-text").appendTo($(cardBody));
+              var smallText = $('<small></small>').addClass("text-muted").text(data['created']).appendTo($(pContent2));
+              $('#content').append($(topDiv));
+
+            });
+        })
+
+
+
+
+
+      </script>
+{% endblock %}
+
+

@@ -1,0 +1,23 @@
+{% extends "tweetapp/plantilla.html" %}
+{% block content %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Search text</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for h in history %}
+    <tr>
+      <th scope="row">{{h.id}}</th>
+      <td>{{h.search_text}}</td>
+      <td>{{h.date}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock %}
