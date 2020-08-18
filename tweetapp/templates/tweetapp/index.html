@@ -46,18 +46,26 @@
               var fecha = date.getDate() + '-' + ( date.getMonth() + 1 ) + '-' + date.getFullYear();
               var hora = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
               var fecha_hora = fecha + ' ' + hora;
-              var data = { search_text : text, date : fecha_hora };
-              $.ajax({
-                      url : 'http://127.0.0.1:8000/v1/history/',
-                      data : data,
-                      method : 'post', //en este caso
-                      dataType : 'json',
+              var apiUrl="http://127.0.0.1:8000/v1/history/";
+              var data = {
+                    "search_text" : text,
+                    "date" : fecha_hora
+                     }
+              fetch(apiUrl,{
+                    method: 'POST',
+                    headers: {
+                       'Content-type' : 'text/json'
+                    },
+                    body: JSON.stringify(data)
+                  })
 
-              });
+
+
               }
 
 
         $("#btn_search").addEventListener("click", function(){
+              sendToDB();
               getData();
               twdata.forEach(data => {
               var topDiv = $('<div style="max-width: 100%;"></div>').addClass("card mb-3");

@@ -1,6 +1,12 @@
 # Ejercicio-entrevista-mDEVZ
 <br>
 Para que el proyecto funcione, es necesario tener instalado python3.7+
+<p>Descripción:</p>
+<p>Sitio en Django 2.2, Ejercicio para entrevista de trabajo empresa mDEVZ, utilizando javascript para obtener datos de busquedas de Twitter y las imprime en un div en pantalla, contiene una base de datos en MySQL llamada Ejercicio_mDEVZ con una tabla donde guarda las busquedas realizadas.</p>
+<p>URLs:<br>
+http://127.0.0.1:8000<br>
+http://127.0.0.1:8000/hist/
+</p>
 <br>
 <h3>Procedimientos de despliegue de proyecto:</h3>
 <br>
