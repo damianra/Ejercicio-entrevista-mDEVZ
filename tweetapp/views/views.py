@@ -27,10 +27,10 @@ class SearchAPIView(viewsets.ReadOnlyModelViewSet):
     serializer_class = TweetSerializer
 
     def get_queryset(self):
-        CONSUMER_KEY = 'L34y0Ez744ifincFlkzqLus57'
-        CONSUMER_SECRET = 'c99M7ymvB5B74p16aAu70YZPbJaRx0VP48hW2UJoN8KNOs7hr8'
-        ACCESS_KEY = '1104063783234879490-kY0DJFnHf29bT11WdvMspTqbGvHqST'
-        ACCESS_SECRET = 'DrHQf9AztSRwJPmDRXjURkFiLx8YmVM23A96C2Ac0xUwd'
+        CONSUMER_KEY = 'CONSUMER_KEY'
+        CONSUMER_SECRET = 'CONSUMER_SECRET'
+        ACCESS_KEY = 'ACCESS_KEY'
+        ACCESS_SECRET = 'ACCESS_SECRET'
         query = self.request.query_params.get('query')
         auth = tweepy.auth.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
         auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
