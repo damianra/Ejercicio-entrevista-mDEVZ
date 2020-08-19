@@ -20,7 +20,9 @@
 
 
 <script>
-
+        function clearBox(elementID){
+            document.getElementById(elementID).innerHTML = "";
+        }
 
         function $(selector){
             return document.querySelector(selector);
@@ -29,7 +31,7 @@
         var twdata = [];
 
         async function getData() {
-
+              $('#content').html('');
               var text = document.getElementById("search_text").value;
               fetch("http://127.0.0.1:8000/v1/search/?query="+text)
               .then(response => response.json())
@@ -40,7 +42,8 @@
                                   });
                                 }
 
-                                function sendToDB(){
+        function sendToDB(){
+
               var text = document.getElementById("search_text").value;
               var date =  new Date();
               var fecha = date.getDate() + '-' + ( date.getMonth() + 1 ) + '-' + date.getFullYear();
@@ -76,7 +79,6 @@
               }
 
 
-
         $("#btn_search").addEventListener("click", function(){
               sendToDB();
               getData();
@@ -92,7 +94,6 @@
               var pContent2 = $('<p></p>').addClass("card-text").appendTo($(cardBody));
               var smallText = $('<small></small>').addClass("text-muted").text(data['created']).appendTo($(pContent2));
               $('#content').append($(topDiv));
-
             });
         })
 
@@ -102,5 +103,6 @@
 
       </script>
 {% endblock %}
+
 
 
