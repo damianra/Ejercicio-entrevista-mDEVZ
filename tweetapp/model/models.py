@@ -2,7 +2,7 @@ from django.db import models
 
 
 class SearchHistory(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     search_text = models.CharField(max_length=150)
     date = models.CharField(max_length=150)
 
